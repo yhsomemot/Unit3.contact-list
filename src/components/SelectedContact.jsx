@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function SelectedContact({ selectedContactId }) {
+export default function SelectedContact({ selectedContactId, setSelectedContactId }) {
     const [contact, setContacts] = useState(null);
 
     useEffect(() => {
@@ -21,7 +21,23 @@ export default function SelectedContact({ selectedContactId }) {
 
         return (
             <section>
-                <h2>{contact ? contact.name : "please wait..."}</h2>
+                {contact ? (
+                    <div>
+                        <h1>{contact.name}</h1>
+                        <p>{contact.username}</p>
+                        <p>{contact.website}</p>
+                        <p>{contact.address.street}</p>
+                        <p>{contact.address.suite}</p>
+                        <p>{contact.address.city}</p>
+                        <p>{contact.address.zipcode}</p>
+                        <h2>{contact.company.name}</h2>
+                        <p>{contact.company.catchPhrase}</p>
+                        <p>{contact.company.bs}</p>
+                        <button onClick={()=> setSelectedContactId(null)}>Return</button>
+                    </div>
+                ) : (
+                    <h2>Please wait...</h2>
+                )}
             </section>
         )
 }
